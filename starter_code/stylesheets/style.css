@@ -9,12 +9,30 @@ links blue: #2E71A6
 footer links grey: #454245
 */
 
+
+/* 👉 Little reset to avoid headaches */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Mulish", Arial, Helvetica, sans-serif;
   background-color: #540b51;
+  font-size: 16px; /* 👉 Default font size for the document */
 }
 p {
   color: black;
+}
+
+img {
+  width: 100%; /* 👉 Saves you headaches later. It makes all images take as much space as they can, instead of random space that is harder to predict */
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 2.5em;
 }
 
 .navbar-logo-menus {
@@ -23,6 +41,7 @@ p {
 .navbar {
   display: flex;
   justify-content: space-between;
+  padding: 8px 16px; /* 👉 Little bit of space around the nav */
 }
 .navbar-logo img {
   height: 70px;
@@ -35,18 +54,80 @@ p {
   padding-top: 20px;
 }
 
+.navbar-logo img {
+  width: 100%;
+  max-width: 140px; 
+}
+
 .header {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  text-align: center; 
+  overflow: hidden;
 }
+
+/*  
+👉 this: 
+
+.header h1,
+p {
+  ...
+}
+  
+means "all the h1 that are in .header" and "all the p (even if they're not in .header)"
+
+Instead, you want: */
+.header h1,
+.header p {
+  text-align: center;
+}
+
+.header .screenshot img {
+  max-width: 800px;
+}
+
+
+/* 👉 the css is easier to read if you add the media queries after each element, instead of all at once. But it's a personal choice, both work the same way */
+@media screen and (min-width: 768px) {
+  .header {
+      flex-direction: row;
+      padding: 15px;
+  }
+  .header h1,
+  .header p {
+    text-align: left;
+  }
+
+  .header > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header .screenshot img { 
+      margin-top: auto;
+      margin-bottom: auto;
+  }
+  .header div:first-of-type {
+    justify-content: center; /* 👉 content is centered vertically on big screens only  */
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .header .screenshot img {
+      margin-top: auto;
+      margin-bottom: auto;
+  }
+  .header h1 {
+      font-size: 4rem;
+  }
+}
+
 .header h1 {
   color: white;
 }
-.header h1,
-p {
-  text-align: center;
-}
+
 .header p {
   padding-bottom: 20px;
   color: white;
@@ -60,10 +141,11 @@ p {
   flex-direction: row;
   gap: 15px;
   align-items: center;
-  padding: 10px;
+  /* padding: 10px; */
 }
 .email-button {
-  width: 300px;
+  /* width: 300px; */ /* 👉 I would always avoid setting a fixed width to buttons, because the text might overflow */
+  white-space: nowrap; /* 👉 this forces the text to stay on one line */
   height: 50px;
   padding: 0 20px;
   text-transform: uppercase;
@@ -73,6 +155,7 @@ p {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
+  border: none;
 }
 .email-button:first-child {
   background-color: white;
@@ -90,6 +173,7 @@ p {
 }
 .google-logo {
   height: 20px;
+  width: 20px;
   background-color: white;
   margin-right: 10px;
   border-radius: 3px;
@@ -101,11 +185,13 @@ p {
   overflow: hidden;
 }
 
-.header {
+/* 👉 this was interfering with the other .header */
+/* .header {
   display: flex;
   justify-content: center;
   flex-direction: row;
-}
+} */
+
 .slack-app-screenshot {
   width: 100%;
   height: 60%;
@@ -176,6 +262,7 @@ p {
 .text-sub-list {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .text-sub-list p {
   margin: 0px;
@@ -452,11 +539,6 @@ footer ul {
     gap: 15px;
     align-items: center;
     padding: 10px;
-  }
-  .header {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
   }
   .slack-app-screenshot {
     width: 100%;
